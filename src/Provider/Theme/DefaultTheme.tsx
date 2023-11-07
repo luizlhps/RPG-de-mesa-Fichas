@@ -1,6 +1,4 @@
-import * as React from 'react';
-import Checkbox from '@mui/material/Checkbox';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import { orange } from '@mui/material/colors';
 import background from '../../assets/images/background.png';
 declare module '@mui/material/styles' {
@@ -32,7 +30,6 @@ export const themeDefault = createTheme({
       fontSize: '16px', // Tamanho de fonte para h3
       fontWeight: '500',
     },
-    
 
     /*         fontFamily: [
           "Inter",
@@ -53,11 +50,18 @@ export const themeDefault = createTheme({
     danger: orange[500],
   },
   palette: {
+    text:{
+      primary: '#fff',
+    },
     background: {
       default: '#050D13',
+      paper: '#121415',
     },
     primary: {
       main: '#050D13',
+    },
+    secondary: {
+      main: '#FF9900',
     },
   },
   components: {
@@ -75,13 +79,25 @@ export const themeDefault = createTheme({
         },
       },
     },
+
     MuiCssBaseline: {
       styleOverrides: (themeParam) => ({
         body: {
-          background: `url(${background}) 100% 68%/cover no-repeat fixed, #050D13`, // Use a imagem como background
-          minHeight: '100vh', // Defina a altura desejada
+          background: `url(${background}) 100% 68%/cover no-repeat fixed, #050D13`,
+          backgroundSize: 'contain',
+
+          a:{
+            color: '#fff',
+            textDecoration: 'none', 
+            ':hover': { color: '#FF9900' }
+          },
+          minHeight: '100vh',
+          '@media (max-width: 1320px)': {
+            backgroundSize: 'cover',
+          },
+
           '@media (max-width: 768px)': {
-            background: `url(${background}) 74% 68%/cover no-repeat fixed, #050D13`, // Imagem e cor de fundo para telas menores
+            background: `url(${background}) 74% 68%/cover no-repeat fixed, #050D13`,
           },
         },
       }),
