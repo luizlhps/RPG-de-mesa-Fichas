@@ -1,7 +1,12 @@
 import { Paper, Table, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme } from '@mui/material';
 import React from 'react';
 
-export const TableHeader = () => {
+interface IProps {
+  field: string;
+  secondField?: string;
+}
+
+export const TableHeader = ({ field, secondField }: IProps) => {
   const theme = useTheme();
   return (
     <TableContainer
@@ -13,14 +18,17 @@ export const TableHeader = () => {
           <TableRow>
             <TableCell>
               <Typography fontWeight={500} fontSize={14} sx={{ color: theme.palette.background.default }}>
-                PERICIAS
+                {field}
               </Typography>
             </TableCell>
-            <TableCell align='right'>
-              <Typography fontWeight={500} fontSize={14} sx={{ color: theme.palette.background.default }}>
-                NIVEIS
-              </Typography>
-            </TableCell>
+
+            {secondField && (
+              <TableCell align='right'>
+                <Typography fontWeight={500} fontSize={14} sx={{ color: theme.palette.background.default }}>
+                  {secondField}
+                </Typography>
+              </TableCell>
+            )}
           </TableRow>
         </TableHead>
       </Table>

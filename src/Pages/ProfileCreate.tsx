@@ -1,36 +1,54 @@
-import {
-  Box,
-  Button,
-  Paper,
-  Stack,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableFooter,
-  TableHead,
-  TableRow,
-  TextField,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
-import React from 'react';
+import { Box, Button, IconButton, Stack, TextField, useMediaQuery, useTheme } from '@mui/material';
 import Stats from '../assets/images/stats.svg';
-import { SkillsTable } from '../Components/Table/Table';
-
+import { SkillsTable } from '../Components/Table/Layouts/SkillsTable';
+import { TableComponent } from '../Components/Table';
+import AccessibleForwardIcon from '@mui/icons-material/AccessibleForward';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 const ProfileCreate = () => {
   const theme = useTheme();
   const breakHD = useMediaQuery(theme.breakpoints.down('lg'));
   const breakIn700 = useMediaQuery('(max-width:700px)');
+  const breakIn860 = useMediaQuery('(max-width:860px)');
   const small = useMediaQuery(theme.breakpoints.down('sm'));
 
+  function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
+    return { name, calories, fat, carbs, protein };
+  }
 
+  const rows = [
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
+  ];
 
-
-
-  console.log(breakHD);
   return (
-    <Box mt={7} bgcolor={theme.palette.background.paper} padding={small ? 3 : 6}>
+    <Box mt={6} bgcolor={theme.palette.background.paper} padding={small ? 3 : 6}>
+      <Stack flexDirection={'row'} rowGap={2} gap={2} justifyContent={'center'} flexWrap={'wrap'} mb={7}>
+        <Box display={'flex'} gap={2} flex={1} alignItems={'center'}>
+          <ArrowBackIcon sx={{ cursor: 'pointer', ':hover': { fill: theme.palette.secondary.main } }} />
+          <Button variant='contained' fullWidth sx={{ maxWidth: 140, height: 24 }}></Button>
+          <Button
+            variant='contained'
+            fullWidth
+            sx={{ maxWidth: 140, height: 24, background: theme.palette.primary.light }}
+          ></Button>
+          <ArrowForwardIcon sx={{ cursor: 'pointer', ':hover': { fill: theme.palette.secondary.main } }} />
+        </Box>
+      </Stack>
+
       <Stack flexDirection={breakHD ? 'column' : 'row'} gap={3} rowGap={8}>
         <Box flex={1}>
           <Stack flexDirection={breakHD ? 'column' : 'row'} direction='row' gap={2} rowGap={2}>
@@ -68,11 +86,28 @@ const ProfileCreate = () => {
             </Stack>
           </Stack>
         </Box>
-        <Box flex={2} display={'flex'} gap={2} >
-          <SkillsTable/>
-          <SkillsTable/>
-          <SkillsTable/>
-        </Box>
+        <Stack flex={2} flexDirection={breakIn860 ? 'column' : 'row'} gap={3} rowGap={2}>
+          <Box flex={1.4}>
+            <SkillsTable />
+          </Box>
+          <Stack rowGap={2} flex={2}>
+            <TableComponent.Root>
+              <TableComponent.Header field='HABILIDADES' />
+              <TableComponent.ContentCustom rows={rows} rowField='name' height={160}>
+                <AccessibleForwardIcon onClick={() => console.log('oi')}></AccessibleForwardIcon>
+              </TableComponent.ContentCustom>
+              <TableComponent.Footer />
+            </TableComponent.Root>
+
+            <TableComponent.Root>
+              <TableComponent.Header field='ATAQUES' />
+              <TableComponent.ContentCustom rows={rows} rowField='name' height={160}>
+                <AccessibleForwardIcon onClick={() => console.log('oi')}></AccessibleForwardIcon>
+              </TableComponent.ContentCustom>
+              <TableComponent.Footer />
+            </TableComponent.Root>
+          </Stack>
+        </Stack>
       </Stack>
     </Box>
   );

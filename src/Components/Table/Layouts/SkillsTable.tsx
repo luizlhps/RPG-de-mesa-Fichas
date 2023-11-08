@@ -13,7 +13,7 @@ import {
   useTheme,
 } from '@mui/material';
 import React from 'react';
-import { TableComponent } from '.';
+import { TableComponent } from '..';
 
 export const SkillsTable = () => {
   const theme = useTheme();
@@ -42,15 +42,16 @@ export const SkillsTable = () => {
 
   return (
     <>
-
-    <TableComponent.Root>
-      <TableComponent.Header />
-      <TableComponent.Content  field='calories'  secondField='calories' rows={rows}></TableComponent.Content>
-      <TableComponent.Footer />
-    </TableComponent.Root>
-
-   
+      <TableComponent.Root>
+        <TableComponent.Header field='PERICIAS' secondField='NIVEIS' />
+        <TableComponent.Content
+          rowsName='name'
+          field='calories'
+          secondField='calories'
+          rows={rows}
+        ></TableComponent.Content>
+        <TableComponent.Footer />
+      </TableComponent.Root>
     </>
   );
 };
-

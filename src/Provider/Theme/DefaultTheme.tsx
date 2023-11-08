@@ -59,6 +59,7 @@ export const themeDefault = createTheme({
     },
     primary: {
       main: '#050D13',
+      light: '#242526'
     },
     secondary: {
       main: '#FF9900',
@@ -69,10 +70,31 @@ export const themeDefault = createTheme({
       styleOverrides: {
         root: {
           '& .MuiTableCell-root': {
-            borderColor: '#FF9900',
+            borderColor: '#110e08',
           },
         },
       },
+    },
+
+    MuiSvgIcon:{
+      styleOverrides:{
+        root:{
+          fill:'white'
+        }
+      }
+    },
+
+    MuiIconButton:{
+      styleOverrides:{
+        root:{
+          ":active":{
+            background: '#FF9900'
+          },
+           ":hover":{
+            background: '#FF9900'
+          } 
+        }
+      }
     },
 
     MuiTextField: {
