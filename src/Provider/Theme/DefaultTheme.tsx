@@ -50,7 +50,7 @@ export const themeDefault = createTheme({
     danger: orange[500],
   },
   palette: {
-    text:{
+    text: {
       primary: '#fff',
     },
     background: {
@@ -65,6 +65,48 @@ export const themeDefault = createTheme({
     },
   },
   components: {
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          '& .MuiTableCell-root': {
+            borderColor: '#FF9900',
+          },
+        },
+      },
+    },
+
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          input: {
+            color: '#FF9900!important',
+          },
+          '& .MuiInputBase-input-MuiOutlinedInput-input': {
+            background: 'red'
+          },
+          '& label.Mui-focused': {
+            color: '#FF9900',
+          },
+          '& label': {
+            color: '#FF9900',
+          },
+          '& .MuiInput-underline:after': {
+            borderBottomColor: 'yellow',
+          },
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: '#FF9900',
+            },
+            '&:hover fieldset': {
+              borderColor: '#ffa621',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#ffa621',
+            },
+          },
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -86,10 +128,10 @@ export const themeDefault = createTheme({
           background: `url(${background}) 100% 68%/cover no-repeat fixed, #050D13`,
           backgroundSize: 'contain',
 
-          a:{
+          a: {
             color: '#fff',
-            textDecoration: 'none', 
-            ':hover': { color: '#FF9900' }
+            textDecoration: 'none',
+            ':hover': { color: '#FF9900' },
           },
           minHeight: '100vh',
           '@media (max-width: 1320px)': {
