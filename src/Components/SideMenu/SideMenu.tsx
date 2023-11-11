@@ -108,9 +108,9 @@ export const SideMenu = ({ children }: { children: ReactNode }) => {
           </MenuList>
         </Drawer>
 
-        <Box padding={!small ? theme.spacing(7, 10) : theme.spacing(4, 3)} paddingBottom={0}>
+        <Box padding={!small ? theme.spacing(7, 10) : theme.spacing(4, 1)} paddingBottom={0}>
           <Box justifyContent={`space-between`} alignItems={'center'} display={'flex'} paddingBottom={2}>
-            <Box sx={{ cursor: 'pointer' }}>
+            <Box sx={{ cursor: 'pointer' }} onClick={() => handleRedirect('/')}>
               <img width={small ? '250px' : 'none'} src={solarPunk} alt='' />
             </Box>
             <Stack flexDirection={`row`} gap={4} display={small ? 'none' : 'flex'}>

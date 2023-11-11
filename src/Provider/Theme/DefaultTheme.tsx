@@ -101,7 +101,7 @@ export const themeDefault = createTheme({
       styleOverrides: {
         root: {
           input: {
-            color: '#FF9900!important',
+            color: '#FF9900',
           },
           '& .MuiInputBase-input-MuiOutlinedInput-input': {
             background: 'red'

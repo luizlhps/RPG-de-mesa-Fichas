@@ -1,18 +1,6 @@
 import {
-  Box,
-  Paper,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableFooter,
-  TableHead,
-  TableRow,
-  Typography,
-  useTheme,
+  useTheme
 } from '@mui/material';
-import React from 'react';
 import { TableComponent } from '..';
 
 export const SkillsTable = () => {

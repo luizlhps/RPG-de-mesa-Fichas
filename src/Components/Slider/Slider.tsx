@@ -1,5 +1,5 @@
-import { Box, Button } from "@mui/material";
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import { Box, Button } from '@mui/material';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
 interface ISliderProps {
   children: ReactNode;
@@ -8,6 +8,7 @@ interface ISliderProps {
   setSlideLength: React.Dispatch<React.SetStateAction<number>>;
   setWidthSlide: React.Dispatch<React.SetStateAction<number>>;
   widthSlide: number;
+  mediaBreak: boolean;
 }
 interface ISlideProps {
   children: ReactNode;
@@ -15,6 +16,8 @@ interface ISlideProps {
 }
 
 export const Slider = ({
+  mediaBreak,
+
   children,
   maxWidthSlide,
   slideIndex,
@@ -23,7 +26,7 @@ export const Slider = ({
   widthSlide,
 }: ISliderProps) => {
   const slider = useRef<HTMLDivElement>(null);
-  const lengthSlider = slider.current?.querySelectorAll("#content");
+  const lengthSlider = slider.current?.querySelectorAll('#content');
   const widthValueSlider = useRef<HTMLDivElement>(null);
 
   const slideImage = () => {
@@ -44,10 +47,10 @@ export const Slider = ({
   }, [lengthSlider]);
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -65,19 +68,21 @@ export const Slider = ({
 
   return (
     <>
-      <Box width={"100%"} maxWidth={maxWidthSlide} ref={widthValueSlider} />
+      <Box width={'100%'} ref={widthValueSlider} />
       <Box
+        position={mediaBreak ? 'unset' : 'absolute'}
         width={widthSlide}
-        overflow={"hidden auto"}
+        overflow={'hidden auto'}
+        flexShrink={0}
         sx={{
-          "::-webkit-scrollbar": {
-            display: "none",
+          '::-webkit-scrollbar': {
+            display: 'none',
           },
         }}
       >
-        <Box display={"flex"} ref={slider} sx={{ transition: "all 0.4s ease" }}>
+        <Box display={'flex'} ref={slider} sx={{ transition: 'all 0.4s ease' }}>
           {React.Children.map(children, (child, index) => (
-            <Box minWidth={widthSlide} id="content">
+            <Box minWidth={widthSlide} id='content'>
               {child}
             </Box>
           ))}
@@ -89,7 +94,7 @@ export const Slider = ({
 
 export const Slide = ({ children, minWidth }: ISlideProps) => {
   return (
-    <Box minWidth={minWidth} height={"100%"} className="slide">
+    <Box minWidth={minWidth} height={'100%'} className='slide'>
       {children}
     </Box>
   );
