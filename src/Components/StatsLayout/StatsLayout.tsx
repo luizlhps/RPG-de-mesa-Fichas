@@ -4,6 +4,7 @@ import Stats from '../../assets/images/stats.svg';
 import { Control, FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import { numbersOnly } from '../../utils/masks';
 import { InputNumbers } from '../InputFields/InputNumbers';
+import { AtributteFieldCreate } from './AtributteField';
 
 interface IProps {
   breakHD: boolean;
@@ -17,15 +18,13 @@ interface IProps {
 
 export const StatsLayout = ({ breakHD, breakIn700, register, errors, control }: IProps) => {
   const [array, setArray] = useState([
-    { id: 1, value: 4, fieldCurrent: 'str' },
+    { id: 1, value: 4, fieldCurrent: null },
     { id: 2, value: 3, fieldCurrent: null },
     { id: 3, value: 3, fieldCurrent: null },
     { id: 4, value: 2, fieldCurrent: null },
     { id: 5, value: 1, fieldCurrent: null },
     { id: 6, value: 0, fieldCurrent: null },
   ]);
-
-  const [value, setValue] = useState<any>();
 
   const theme = useTheme();
 
@@ -46,7 +45,6 @@ export const StatsLayout = ({ breakHD, breakIn700, register, errors, control }: 
       outline: 'none',
     },
   };
-  const fieldName = 'str';
   console.log(array);
   return (
     <Box flex={1}>
@@ -77,99 +75,73 @@ export const StatsLayout = ({ breakHD, breakIn700, register, errors, control }: 
       </Stack>
       <Stack flexDirection={breakIn700 ? 'column' : 'row'} gap={3} rowGap={4} mt={6} alignItems={'center'}>
         <Box position={'relative'}>
-          <Autocomplete
-            defaultValue={'0'}
-            disablePortal
-            value={value || null}
-            onChange={(e, value) => {
-              //o valor que pegar no value preciso colocar0 no fieldcurrent o nome do campo que estou
-              console.log(value)
-              if(!value ) return value
-              const newValue = array.map((item) => {
-                if (fieldName === item.fieldCurrent && item.id !== value.id) return { ...item, fieldCurrent: null };
-                if (item.id === value.id) return { ...item, fieldCurrent: 'str' };
-                return item;
-              });
-
-              setArray(newValue);
-
-              setValue(value);
+          <AtributteFieldCreate arrayOfOptions={array} fieldName='cha' setArray={setArray} style={defaultStyle} />
+          <AtributteFieldCreate
+            arrayOfOptions={array}
+            fieldName='wis'
+            setArray={setArray}
+            style={{
+              ...defaultStyle,
+              ...{
+                position: 'absolute',
+                transform: 'translate(0, -50%)',
+                top: '63%;',
+                left: '3px',
+              },
             }}
-            options={array.filter((item) => item.fieldCurrent === null || item.fieldCurrent === fieldName)}
-            renderOption={(props, option) => (
-              <Box component='li' {...props} key={option.id}>
-                {option.value.toString()}
-              </Box>
-            )}
-            isOptionEqualToValue={(option, value) => option.id === value.id}
-            getOptionLabel={(option) => option.value.toString()} // Use o valor numérico como rótulo
-            sx={defaultStyle}
-            renderInput={(params) => (
-              <div ref={params.InputProps.ref}>
-                <input type='text' {...params.inputProps} />
-              </div>
-            )}
           />
 
           {/*  <InputNumbers control={control} nameField='Attributes.CHA' style={defaultStyle} /> */}
-          <InputNumbers
-            control={control}
-            nameField='Attributes.WIS'
+          <AtributteFieldCreate
+            arrayOfOptions={array}
+            fieldName='dex'
+            setArray={setArray}
             style={{
-              position: 'absolute',
-              width: 42,
-              transform: 'translate(0, -50%)',
-              top: '60%;',
-              left: '4px',
-              input: { textAlign: 'center', color: theme.palette.text.primary },
+              ...defaultStyle,
+              ...{
+                transform: 'translate(0, -50%)',
+                top: '34%;',
+                left: '75%',
+              },
             }}
           />
-          <InputNumbers
-            control={control}
-            nameField='Attributes.DEX'
+
+          <AtributteFieldCreate
+            arrayOfOptions={array}
+            fieldName='con'
+            setArray={setArray}
             style={{
-              position: 'absolute',
-              width: 42,
-              transform: 'translate(0, -50%)',
-              top: '31.5%;',
-              left: '75%',
-              input: { textAlign: 'center', color: theme.palette.text.primary },
+              ...defaultStyle,
+              ...{
+                top: '63%;',
+                left: '75%',
+              },
             }}
           />
-          <InputNumbers
-            control={control}
-            nameField='Attributes.CON'
+
+          <AtributteFieldCreate
+            arrayOfOptions={array}
+            fieldName='str'
+            setArray={setArray}
             style={{
-              position: 'absolute',
-              width: 42,
-              transform: 'translate(0, -50%)',
-              top: '60%;',
-              left: '75%',
-              input: { textAlign: 'center', color: theme.palette.text.primary },
+              ...defaultStyle,
+              ...{
+                top: '20%;',
+                left: '38.5%',
+              },
             }}
           />
-          <InputNumbers
-            control={control}
-            nameField='Attributes.STR'
+
+          <AtributteFieldCreate
+            arrayOfOptions={array}
+            fieldName='int'
+            setArray={setArray}
             style={{
-              position: 'absolute',
-              width: 42,
-              transform: 'translate(0, -50%)',
-              top: '17%;',
-              left: '38.5%',
-              input: { textAlign: 'center', color: theme.palette.text.primary },
-            }}
-          />
-          <InputNumbers
-            control={control}
-            nameField='Attributes.INT'
-            style={{
-              position: 'absolute',
-              width: 42,
-              transform: 'translate(0, -50%)',
-              top: '74%;',
-              left: '38.5%',
-              input: { textAlign: 'center', color: theme.palette.text.primary },
+              ...defaultStyle,
+              ...{
+                top: '77%;',
+                left: '38.5%',
+              },
             }}
           />
 
