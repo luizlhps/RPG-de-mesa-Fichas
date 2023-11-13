@@ -24,7 +24,6 @@ const useSlider = (open?: boolean) => {
   const handleContinueForm = () => {
     setSlideIndex((imageIndex) => {
       const lastIndex = slideLength - 1;
-      console.log(imageIndex, lastIndex)
       if (imageIndex === lastIndex) {
         return 0;
       } else {

@@ -1,11 +1,11 @@
-import { Autocomplete, Box, Button, Stack, TextField, Typography, useTheme } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Box, Button, Stack, TextField, Typography, useTheme } from '@mui/material';
+import React from 'react';
 import Stats from '../../assets/images/stats.svg';
 import { Control, FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
-import { numbersOnly } from '../../utils/masks';
-import { InputNumbers } from '../InputFields/InputNumbers';
 import { AtributteFieldCreate } from './AtributteField';
 import { OptionAttribute } from './AtributteField/types/OptionAttribute';
+import { ComboBox } from '../ComboBox';
+import { IClasses } from '../../services/types';
 
 interface IProps {
   breakHD: boolean;
@@ -15,11 +15,19 @@ interface IProps {
   control: Control<FieldValues, any>;
   attributes: OptionAttribute[] | undefined;
   setAttributes: React.Dispatch<React.SetStateAction<OptionAttribute[] | undefined>>;
+  classes: IClasses[] | undefined;
 }
-//que tal ao invez de remover da lista colocar um parametro que se caso o valor da proprieda não esteja nula ele não aparece, caso ele selecione coloque o nome do campo
-//e caso o valor novo é diferente do velho e tem o nome do field o field antigo vira null
 
-export const StatsLayout = ({ breakHD, breakIn700, register, errors, control, attributes, setAttributes }: IProps) => {
+export const StatsLayout = ({
+  breakHD,
+  breakIn700,
+  register,
+  errors,
+  control,
+  attributes,
+  setAttributes,
+  classes,
+}: IProps) => {
   const theme = useTheme();
 
   const defaultStyle = {
@@ -40,18 +48,23 @@ export const StatsLayout = ({ breakHD, breakIn700, register, errors, control, at
     },
   };
 
-  useEffect(() => {
-    console.log(attributes);
-  }, []);
-
   return (
     <Box flex={1}>
       <Stack flexDirection={breakHD ? 'column' : 'row'} direction='row' gap={2} rowGap={2}>
-        <TextField {...register('Name')} autoComplete='off' fullWidth label='Nome do Personagem' variant='outlined' />
-        <TextField {...register('Height')} autoComplete='off' label='Altura' variant='outlined' />
+        <TextField {...register('Name', {required: true})} autoComplete='off' fullWidth label='Nome do Personagem' variant='outlined' />
+        <TextField {...register('Height', {required: true})} autoComplete='off' label='Altura' variant='outlined' type='number' />
       </Stack>
       <Stack flexDirection={breakHD ? 'column' : 'row'} mt={2} direction='row' gap={2} rowGap={2}>
-        <TextField {...register('Class')} autoComplete='off' fullWidth label='Classe' variant='outlined' />
+        <ComboBox
+          control={control}
+          defaultValue={null}
+          nameField='Classes'
+          options={classes}
+          property='name'
+          rules={{}}
+          style={{ width: '100%' }}
+        />
+
         <TextField {...register('Origin')} autoComplete='off' label='Origem' variant='outlined' />
         <TextField {...register('Weight')} autoComplete='off' label='Peso' variant='outlined' />
       </Stack>
@@ -76,13 +89,21 @@ export const StatsLayout = ({ breakHD, breakIn700, register, errors, control, at
           <Stack flexDirection={breakIn700 ? 'column' : 'row'} gap={3} rowGap={4} mt={6} alignItems={'center'}>
             <Box position={'relative'}>
               <AtributteFieldCreate
-                arrayOfOptions={attributes}
+                control={control}
+                rules={{ require: true }}
+                defaultValue={null}
+                name='attributes.CHA'
+                options={attributes}
                 fieldName='cha'
                 setArray={setAttributes}
                 style={defaultStyle}
               />
               <AtributteFieldCreate
-                arrayOfOptions={attributes}
+                control={control}
+                rules={{ require: true }}
+                defaultValue={null}
+                name='attributes.WIS'
+                options={attributes}
                 fieldName='wis'
                 setArray={setAttributes}
                 style={{
@@ -98,7 +119,11 @@ export const StatsLayout = ({ breakHD, breakIn700, register, errors, control, at
 
               {/*  <InputNumbers control={control} nameField='Attributes.CHA' style={defaultStyle} /> */}
               <AtributteFieldCreate
-                arrayOfOptions={attributes}
+                control={control}
+                rules={{ require: true }}
+                defaultValue={null}
+                name='attributes.DEX'
+                options={attributes}
                 fieldName='dex'
                 setArray={setAttributes}
                 style={{
@@ -112,7 +137,11 @@ export const StatsLayout = ({ breakHD, breakIn700, register, errors, control, at
               />
 
               <AtributteFieldCreate
-                arrayOfOptions={attributes}
+                control={control}
+                rules={{ require: true }}
+                defaultValue={null}
+                name='attributes.CON'
+                options={attributes}
                 fieldName='con'
                 setArray={setAttributes}
                 style={{
@@ -125,7 +154,11 @@ export const StatsLayout = ({ breakHD, breakIn700, register, errors, control, at
               />
 
               <AtributteFieldCreate
-                arrayOfOptions={attributes}
+                control={control}
+                rules={{ require: true }}
+                defaultValue={null}
+                name='attributes.STR'
+                options={attributes}
                 fieldName='str'
                 setArray={setAttributes}
                 style={{
@@ -138,7 +171,11 @@ export const StatsLayout = ({ breakHD, breakIn700, register, errors, control, at
               />
 
               <AtributteFieldCreate
-                arrayOfOptions={attributes}
+                control={control}
+                rules={{ require: true }}
+                defaultValue={null}
+                name='attributes.INT'
+                options={attributes}
                 fieldName='int'
                 setArray={setAttributes}
                 style={{

@@ -149,22 +149,32 @@ export const themeDefault = createTheme({
         body: {
           background: `url(${background}) 100% 68%/cover no-repeat fixed, #050D13`,
           backgroundSize: 'contain',
-
-          a: {
-            color: '#fff',
-            textDecoration: 'none',
-            ':hover': { color: '#FF9900' },
-          },
-          minHeight: '100vh',
-          '@media (max-width: 1320px)': {
+        },
+        "input::-webkit-inner-spin-button": {
+          "-webkit-appearance": "none",
+          "margin": 0,
+        },
+        "input[type=number]": {
+          "-moz-appearance": "textfield",
+        },
+        a: {
+          color: '#fff',
+          textDecoration: 'none',
+          ':hover': { color: '#FF9900' },
+        },
+        minHeight: '100vh',
+        '@media (max-width: 1320px)': {
+          body: {
             backgroundSize: 'cover',
           },
-
-          '@media (max-width: 768px)': {
+        },
+        '@media (max-width: 768px)': {
+          body: {
             background: `url(${background}) 74% 68%/cover no-repeat fixed, #050D13`,
           },
         },
       }),
     },
+    
   },
 });

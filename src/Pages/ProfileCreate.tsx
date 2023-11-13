@@ -13,6 +13,9 @@ import { StatsLayout } from '../Components/StatsLayout/StatsLayout';
 import { FieldValues, useForm, Controller } from 'react-hook-form';
 import { Box, Button, Stack, TextField, useMediaQuery, useTheme } from '@mui/material';
 import { OptionAttribute } from '../Components/StatsLayout/AtributteField/types/OptionAttribute';
+import { Api } from '../services/axiosConfig';
+import { IClasses } from '../services/types';
+
 const ProfileCreate = () => {
   const theme = useTheme();
   const breakHD = useMediaQuery(theme.breakpoints.down('lg'));
@@ -20,34 +23,34 @@ const ProfileCreate = () => {
   const breakIn860 = useMediaQuery('(max-width:860px)');
   const small = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const [attributes, setAttributes] = useState<OptionAttribute[]>()
+  const [attributes, setAttributes] = useState<OptionAttribute[]>();
+  const [classes, setclasses] = useState<IClasses[]>();
 
   const {
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors },
   } = useForm();
 
   useEffect(() => {
-    const res = axios.get('http://127.0.0.1:5000/new').then((res) => {
-      console.log(res.data.attributes);
+    const res = Api.get('/new').then((res) => {
 
-      console.log(res)
 
-      const arrayOfAttributes = res.data.attributes
+      const arrayOfAttributes = res.data.attributes;
+      const classesApi = res.data.classes;
 
-     const attributesModify = arrayOfAttributes.map((item:number, index:number) => {
+      const attributesModify = arrayOfAttributes.map((item: number, index: number) => {
         return { id: index + 1, value: item, fieldCurrent: null };
-      })
+      });
+      //Atributtes
+      setAttributes(attributesModify);
 
-      setAttributes(attributesModify)
-  
+      //classes
+      setclasses(classesApi);
     });
   }, []);
-
-
-
 
   const {
     handleContinueForm,
@@ -104,7 +107,16 @@ const ProfileCreate = () => {
       />
 
       <Stack flexDirection={breakHD ? 'column' : 'row'} gap={3} rowGap={8}>
-        <StatsLayout setAttributes={setAttributes} attributes={attributes} breakHD={breakHD} breakIn700={breakIn700} errors={errors} control={control} register={register} />
+        <StatsLayout
+          setAttributes={setAttributes}
+          attributes={attributes}
+          breakHD={breakHD}
+          breakIn700={breakIn700}
+          errors={errors}
+          control={control}
+          classes={classes}
+          register={register}
+        />
 
         <Stack flex={2} flexDirection={breakIn860 ? 'column' : 'row'} gap={3} rowGap={2}>
           <Box position={'relative'} width={'100%'}>
