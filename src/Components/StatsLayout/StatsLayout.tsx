@@ -56,6 +56,7 @@ export const StatsLayout = ({
       </Stack>
       <Stack flexDirection={breakHD ? 'column' : 'row'} mt={2} direction='row' gap={2} rowGap={2}>
         <ComboBox
+          label='Classe'
           control={control}
           defaultValue={null}
           nameField='Classes'
@@ -66,7 +67,7 @@ export const StatsLayout = ({
         />
 
         <TextField {...register('Origin')} autoComplete='off' label='Origem' variant='outlined' />
-        <TextField {...register('Weight')} autoComplete='off' label='Peso' variant='outlined' />
+        <TextField {...register('Weight', {required: true})} autoComplete='off' label='Peso' variant='outlined' type='number' />
       </Stack>
       <Stack mt={6} direction='row' gap={2}>
         <Button

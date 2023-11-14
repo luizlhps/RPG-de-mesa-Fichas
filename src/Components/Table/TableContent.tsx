@@ -1,4 +1,4 @@
-import { Box, Stack, Table, TableBody, TableCell, TableRow, useTheme } from '@mui/material';
+import { Box, IconButton, Stack, Table, TableBody, TableCell, TableRow, useTheme } from '@mui/material';
 import React from 'react';
 
 export const TableContent = ({
@@ -7,14 +7,16 @@ export const TableContent = ({
   key,
   secondField,
   field,
+  fn,
   withoutBox,
 }: {
   rows: any;
-  key?: string
+  key?: string;
   field: string;
   rowsName: string;
   secondField?: string;
   withoutBox?: boolean;
+  fn: (selected: any) => void;
 }) => {
   const theme = useTheme();
 
@@ -29,24 +31,23 @@ export const TableContent = ({
     >
       <Table style={{ tableLayout: 'fixed' }}>
         <TableBody>
-          {rows.map((row: any, index:any) => (
+          {rows.map((row: any, index: any) => (
             <TableRow key={key ?? index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component='th' scope='row'>
                 {row[rowsName]}
               </TableCell>
               <TableCell align='right' padding='none'>
                 <Stack flexDirection={'row'} gap={2} justifyContent={'flex-end'} marginRight={2}>
-                  <Box
-                    display={'flex'}
-                    justifyContent={'center'}
-                    alignItems={'center'}
-                    width={30}
-                    height={30}
-                    borderRadius={withoutBox ? 0 : 1}
-                    border={withoutBox ? 'none' : `1px solid ${theme.palette.secondary.main}`}
+                  <IconButton
+                    sx={{
+                      width: 30,
+                      color: theme.palette.text.primary,
+                      height: 30,
+                    }}
+                    onClick={() => fn(row)}
                   >
-                    {row[field]}
-                  </Box>
+                    +
+                  </IconButton>
                   {secondField && (
                     <>
                       <Box

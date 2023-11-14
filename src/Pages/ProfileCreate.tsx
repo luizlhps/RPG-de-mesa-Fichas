@@ -34,10 +34,12 @@ const ProfileCreate = () => {
     formState: { errors },
   } = useForm();
 
+
+
   useEffect(() => {
     const res = Api.get('/new').then((res) => {
 
-
+      console.log(JSON.parse(res.data.sheet))
       const arrayOfAttributes = res.data.attributes;
       const classesApi = res.data.classes;
 

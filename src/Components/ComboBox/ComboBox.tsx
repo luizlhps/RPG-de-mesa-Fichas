@@ -10,9 +10,10 @@ interface IProps {
   options: any;
   property: string;
   rules: any;
+  label:string
 }
 
-export const ComboBox = ({ options, control, defaultValue, rules, nameField, style, property }: IProps) => {
+export const ComboBox = ({ options, control, defaultValue, rules, nameField, style, property, label }: IProps) => {
   return (
     <>
       {options ? (
@@ -36,7 +37,7 @@ export const ComboBox = ({ options, control, defaultValue, rules, nameField, sty
                   : null
               }
               getOptionLabel={(option) => option[property]}
-              renderInput={(params) => <TextField variant='outlined' {...params} label='Movie' />}
+              renderInput={(params) => <TextField variant='outlined' {...params} label={label} />}
               renderOption={(props, option) => (
                 <Box component='li' {...props} key={option.id}>
                   {option[property]}

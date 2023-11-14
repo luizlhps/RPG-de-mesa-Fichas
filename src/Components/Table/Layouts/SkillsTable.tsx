@@ -33,6 +33,7 @@ export const SkillsTable = () => {
       <TableComponent.Root>
         <TableComponent.Header field='PERICIAS' secondField='NIVEIS' />
         <TableComponent.Content
+        fn={(fn)=>console.log(fn)}
           rowsName='name'
           field='calories'
           secondField='calories'
