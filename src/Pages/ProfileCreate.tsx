@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { SkillsTable } from '../Components/Table/Layouts/SkillsTable';
 import { TableComponent } from '../Components/Table';
@@ -10,8 +9,8 @@ import useSlider from '../hook/useSlider';
 
 import { Stepper } from '../Components/Stepper/Stepper';
 import { StatsLayout } from '../Components/StatsLayout/StatsLayout';
-import { FieldValues, useForm, Controller } from 'react-hook-form';
-import { Box, Button, Stack, TextField, useMediaQuery, useTheme } from '@mui/material';
+import { FieldValues, useForm } from 'react-hook-form';
+import { Box, Button, Stack, useMediaQuery, useTheme } from '@mui/material';
 import { OptionAttribute } from '../Components/StatsLayout/AtributteField/types/OptionAttribute';
 import { Api } from '../services/axiosConfig';
 import { IClasses } from '../services/types';
@@ -24,6 +23,7 @@ const ProfileCreate = () => {
   const small = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [attributes, setAttributes] = useState<OptionAttribute[]>();
+  const [originAttributes, setOriginAttributes] = useState<any>();
   const [classes, setclasses] = useState<IClasses[]>();
 
   const {
@@ -34,18 +34,17 @@ const ProfileCreate = () => {
     formState: { errors },
   } = useForm();
 
-
-
   useEffect(() => {
     const res = Api.get('/new').then((res) => {
-
-      console.log(JSON.parse(res.data.sheet))
+      console.log(JSON.parse(res.data.sheet));
       const arrayOfAttributes = res.data.attributes;
       const classesApi = res.data.classes;
 
+      setOriginAttributes(arrayOfAttributes);
       const attributesModify = arrayOfAttributes.map((item: number, index: number) => {
         return { id: index + 1, value: item, fieldCurrent: null };
       });
+
       //Atributtes
       setAttributes(attributesModify);
 
@@ -53,6 +52,56 @@ const ProfileCreate = () => {
       setclasses(classesApi);
     });
   }, []);
+
+  const validadeFieldAttritube = (attributesField: any) => {
+    if (!attributesField) return;
+
+    const arrayOfValuesAttributes: number[] = Object.values(attributesField);
+    let haveError = false;
+    let amountOf0: number[] = [];
+
+    arrayOfValuesAttributes.forEach((element) => {
+      //adds a numeric element if it is zero
+      if (element == 0) {
+        amountOf0.push(element);
+      }
+
+      //verify if the Amountof0 the zeros of array is greater than 1
+      if (amountOf0.length > 1) {
+        haveError = true;
+        return;
+      }
+
+      // verify if any null number
+      if (element === null) {
+        haveError = true;
+        return;
+      }
+
+      //verify if are all field correct
+      if (originAttributes) {
+        const originAttributesSorted = JSON.stringify(originAttributes.sort());
+        const arrayOfValuesAttributesSorted = JSON.stringify(originAttributes.sort());
+
+        if (originAttributesSorted !== arrayOfValuesAttributesSorted) return (haveError = true);
+      }
+    });
+    return haveError;
+  };
+
+  useEffect(() => {
+    const attributesField = watch('attributes');
+    const haveError = validadeFieldAttritube(attributesField);
+
+    if (!haveError && attributesField) {
+      Api.post('/new/hp-mp', {
+        class: 1,
+        level: 1,
+        attributes: attributesField,
+      });
+
+    }
+  }, [attributes]); 
 
   const {
     handleContinueForm,

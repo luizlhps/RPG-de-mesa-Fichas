@@ -146,9 +146,14 @@ export const themeDefault = createTheme({
 
     MuiCssBaseline: {
       styleOverrides: (themeParam) => ({
+
+   
         body: {
           background: `url(${background}) 100% 68%/cover no-repeat fixed, #050D13`,
           backgroundSize: 'contain',
+        },
+        "#root": {
+          height: '100%'
         },
         "input::-webkit-inner-spin-button": {
           "WebkitAppearance": "none",

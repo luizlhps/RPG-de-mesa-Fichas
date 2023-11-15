@@ -18,7 +18,8 @@ const Home = () => {
         display={'flex'}
         flexDirection={'column'}
         alignItems={small ? 'center' : 'flex-start'}
-        mt={small ? '4rem' : '8rem'}
+        height={'100%'}
+        justifyContent={`center`}
       >
         <Typography fontWeight={500} variant='h1' width={small ? '90%' : 400} alignSelf={'flex-start'}>
           Gestão de fichas para seu RPG bolado

@@ -1,4 +1,4 @@
-import { Box, Button, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Button, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React from 'react';
 import { DataGridLayout } from '../Components/DataGrid/Datagrid';
 import { Columns, rows } from '../Components/DataGrid/columns/Column';
@@ -10,7 +10,7 @@ const All = () => {
   const columnConfig = Columns()
 
   return (
-    <>
+    <Stack alignSelf={'center'} height={'100%'} justifyContent={'center'}>
       <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
         <Typography fontWeight={500} variant='h1' width={small ? '90%' : 400} mt={2}>
           Todas as fichas
@@ -30,7 +30,7 @@ const All = () => {
         setCurrentPage={()=>(console.log())}
         disableRowSelectionOnClick
       />
-    </>
+      </Stack>
   );
 };
 

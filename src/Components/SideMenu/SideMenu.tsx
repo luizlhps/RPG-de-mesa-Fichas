@@ -1,17 +1,5 @@
 import { ReactNode, useCallback, useEffect, useState } from 'react';
-import {
-  Box,
-  Drawer,
-  IconButton,
-  MenuItem,
-  MenuList,
-  Stack,
-  Typography,
-  styled,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import { Box, Drawer, IconButton, MenuItem, MenuList, Stack, styled, useMediaQuery, useTheme } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import solarPunk from '../../assets/images/solarPunk.svg';
 import { Link, useNavigate } from 'react-router-dom';
@@ -62,7 +50,7 @@ export const SideMenu = ({ children }: { children: ReactNode }) => {
 
   return (
     <>
-      <Box minHeight={'100vh'}>
+      <Box height={'100%'}>
         <DrawerHeader>
           <Box
             width={'100%'}
@@ -70,11 +58,12 @@ export const SideMenu = ({ children }: { children: ReactNode }) => {
             sx={{ background: theme.palette.background.paper, position: 'fixed', zIndex: 2 }}
           ></Box>
 
-          <div className='menu'>
+          <Box className='menu' display={'flex'}>
             <IconButton onClick={handleMenuOpen}>
               <MenuIcon sx={{ color: theme.palette.text.primary }} />
             </IconButton>
-          </div>
+            <img width={'150px'} src={solarPunk} alt='' />
+          </Box>
         </DrawerHeader>
 
         <Drawer
@@ -89,8 +78,14 @@ export const SideMenu = ({ children }: { children: ReactNode }) => {
           anchor='left'
           open={isOpen}
         >
-          <DrawerHeader>
-            <IconButton onClick={handleMenuClose}>
+          <DrawerHeader
+            sx={{
+              width: 40,
+              top: '10px',
+              left: '10px',
+            }}
+          >
+            <IconButton sx={{ width: 40, height: 40 }} onClick={handleMenuClose}>
               <MenuIcon sx={{ color: theme.palette.text.primary }} />
             </IconButton>
           </DrawerHeader>
@@ -108,17 +103,30 @@ export const SideMenu = ({ children }: { children: ReactNode }) => {
           </MenuList>
         </Drawer>
 
-        <Box padding={!small ? theme.spacing(7, 10) : theme.spacing(4, 1)} paddingBottom={0}>
-          <Box justifyContent={`space-between`} alignItems={'center'} display={'flex'} paddingBottom={2}>
-            <Box sx={{ cursor: 'pointer' }} onClick={() => handleRedirect('/')}>
-              <img width={small ? '250px' : 'none'} src={solarPunk} alt='' />
+        <Box height={small ? 'calc(100% - 60px)' : '100%'} paddingBottom={0}>
+          <Box
+            justifyContent={`space-between`}
+            alignItems={'center'}
+            display={'flex'}
+            padding={`0 ${theme.spacing(3)}`}
+          >
+            <Box
+              display={'flex'}
+              alignItems={`center`}
+              height={64}
+              sx={{ cursor: 'pointer', display: small ? 'none' : 'flex' }}
+              onClick={() => handleRedirect('/')}
+            >
+              <img width={'180px'} src={solarPunk} alt='' />
             </Box>
             <Stack flexDirection={`row`} gap={4} display={small ? 'none' : 'flex'}>
               <Link to={'/'}> Home</Link>
               <Link to={'/all'}>Ver Todos</Link>
             </Stack>
           </Box>
-          {children}
+          <Box height={'calc(100% - 64px)'} padding={`0 ${theme.spacing(3)}`}>
+            {children}
+          </Box>
         </Box>
       </Box>
     </>
