@@ -1,18 +1,25 @@
-import { AttacksTable } from '../Components/Table/Layouts/AttacksTable';
-import { SkillsTable } from '../Components/Table/Layouts/SkillsTable';
+import { FieldValues, useForm } from 'react-hook-form';
+
+//mui
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Slide, Slider } from '../Components/Slider/Slider';
-import useSlider from '../hook/useSlider';
+import { Box, Button, Stack, useMediaQuery, useTheme } from '@mui/material';
 
+//components
+import { Slide, Slider } from '../Components/Slider/Slider';
 import { Stepper } from '../Components/Stepper/Stepper';
 import { StatsLayout } from '../Components/StatsLayout/StatsLayout';
-import { FieldValues, useForm } from 'react-hook-form';
-import { Box, Button, Stack, useMediaQuery, useTheme } from '@mui/material';
+import { AttacksTable } from '../Components/Table/Layouts/AttacksTable';
+import { SkillsTable } from '../Components/Table/Layouts/SkillsTable';
 import { AbilityTable } from '../Components/Table/Layouts/AbilityTable';
-import falseData from '../utils/createFalseData';
+
+//hooks
+import useSlider from '../hook/useSlider';
 import useFetchHpMp from '../hook/useFetchHpMp';
 import useFetchNewSheet from '../hook/useFetchNewSheet';
+
+//utils
+import falseData from '../utils/createFalseData';
 
 const ProfileCreate = () => {
   const theme = useTheme();
@@ -20,7 +27,6 @@ const ProfileCreate = () => {
   const breakIn700 = useMediaQuery('(max-width:700px)');
   const breakIn860 = useMediaQuery('(max-width:860px)');
   const small = useMediaQuery(theme.breakpoints.down('sm'));
-
 
   const {
     register,
@@ -32,14 +38,11 @@ const ProfileCreate = () => {
   } = useForm();
   const classField = watch('Classes');
 
-
   //fetch data and update atributes
-  const {attributes, classes, originAttributes, setAttributes} = useFetchNewSheet()
+  const { attributes, classes, originAttributes, setAttributes } = useFetchNewSheet();
 
   //fetch Hp and Mp
-  useFetchHpMp({attributes, classField, originAttributes, setValue, watch})
-
-
+  useFetchHpMp({ attributes, classField, originAttributes, setValue, watch });
 
   const {
     handleContinueForm,
