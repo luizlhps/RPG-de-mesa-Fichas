@@ -1,7 +1,7 @@
 import { Box, Button, Stack, TextField, Typography, useTheme } from '@mui/material';
 import React from 'react';
 import Stats from '../../assets/images/stats.svg';
-import { Control, FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import { Control, Controller, FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import { AtributteFieldCreate } from './AtributteField';
 import { OptionAttribute } from './AtributteField/types/OptionAttribute';
 import { ComboBox } from '../ComboBox';
@@ -51,8 +51,20 @@ export const StatsLayout = ({
   return (
     <Box flex={1}>
       <Stack flexDirection={breakHD ? 'column' : 'row'} direction='row' gap={2} rowGap={2}>
-        <TextField {...register('Name', {required: true})} autoComplete='off' fullWidth label='Nome do Personagem' variant='outlined' />
-        <TextField {...register('Height', {required: true})} autoComplete='off' label='Altura' variant='outlined' type='number' />
+        <TextField
+          {...register('Name', { required: true })}
+          autoComplete='off'
+          fullWidth
+          label='Nome do Personagem'
+          variant='outlined'
+        />
+        <TextField
+          {...register('Height', { required: true })}
+          autoComplete='off'
+          label='Altura'
+          variant='outlined'
+          type='number'
+        />
       </Stack>
       <Stack flexDirection={breakHD ? 'column' : 'row'} mt={2} direction='row' gap={2} rowGap={2}>
         <ComboBox
@@ -67,7 +79,13 @@ export const StatsLayout = ({
         />
 
         <TextField {...register('Origin')} autoComplete='off' label='Origem' variant='outlined' />
-        <TextField {...register('Weight', {required: true})} autoComplete='off' label='Peso' variant='outlined' type='number' />
+        <TextField
+          {...register('Weight', { required: true })}
+          autoComplete='off'
+          label='Peso'
+          variant='outlined'
+          type='number'
+        />
       </Stack>
       <Stack mt={6} direction='row' gap={2}>
         <Button
@@ -187,14 +205,68 @@ export const StatsLayout = ({
                   },
                 }}
               />
-
               <img src={Stats} alt='stats' />
             </Box>
 
             <Stack width={'100%'} rowGap={2}>
-              <TextField size='small' {...register('HitPoints')} autoComplete='off' label='HP' variant='outlined' />
-              <TextField size='small' {...register('ManaPoints')} autoComplete='off' label='MP' variant='outlined' />
-              <TextField size='small' {...register('Defense')} autoComplete='off' label='DEF' variant='outlined' />
+              <Controller
+                name='HP'
+                defaultValue={''}
+                control={control}
+                render={({ field }) => (
+                  <>
+                    <TextField
+                      disabled
+                      type='number'
+                      size='small'
+                      value={field.value}
+                      onChange={field.onChange}
+                      autoComplete='off'
+                      label='HP'
+                      variant='outlined'
+                    />
+                  </>
+                )}
+              />
+              <Controller
+                disabled
+                name='MP'
+                defaultValue={''}
+                control={control}
+                render={({ field }) => (
+                  <>
+                    <TextField
+                     disabled
+                      type='number'
+                      size='small'
+                      value={field.value}
+                      onChange={field.onChange}
+                      autoComplete='off'
+                      label='MP'
+                      variant='outlined'
+                    />
+                  </>
+                )}
+              />
+              <Controller
+                name='DEF'
+                defaultValue={''}
+                control={control}
+                render={({ field }) => (
+                  <>
+                    <TextField
+                      disabled
+                      type='number'
+                      size='small'
+                      value={field.value}
+                      onChange={field.onChange}
+                      autoComplete='off'
+                      label='DEF'
+                      variant='outlined'
+                    />
+                  </>
+                )}
+              />
               <Stack>
                 <Typography fontSize={14}> Level: 2</Typography>
                 <Typography fontSize={14}> Atributos Disponiveis: 2</Typography>

@@ -103,11 +103,13 @@ export const SideMenu = ({ children }: { children: ReactNode }) => {
           </MenuList>
         </Drawer>
 
-        <Box height={small ? 'calc(100% - 60px)' : '100%'} paddingBottom={0}>
+        <Box height={'calc(100% - 65px)'}>
           <Box
             justifyContent={`space-between`}
             alignItems={'center'}
             display={'flex'}
+            position={'absolute'}
+            width={'100%'}
             padding={`0 ${theme.spacing(3)}`}
           >
             <Box
@@ -124,7 +126,7 @@ export const SideMenu = ({ children }: { children: ReactNode }) => {
               <Link to={'/all'}>Ver Todos</Link>
             </Stack>
           </Box>
-          <Box height={'calc(100% - 64px)'} padding={`0 ${theme.spacing(3)}`}>
+          <Box height={'100% '} padding={`0 ${theme.spacing(3)}`} paddingTop={'64px'}>
             {children}
           </Box>
         </Box>

@@ -7,10 +7,10 @@ const All = () => {
   const theme = useTheme();
   const small = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const columnConfig = Columns()
+  const columnConfig = Columns();
 
   return (
-    <Stack alignSelf={'center'} height={'100%'} justifyContent={'center'}>
+    <Stack alignSelf={'center'} height={'100%'} justifyContent={small ? 'none' : `center`}>
       <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
         <Typography fontWeight={500} variant='h1' width={small ? '90%' : 400} mt={2}>
           Todas as fichas
@@ -27,10 +27,10 @@ const All = () => {
         page={1}
         rows={rows}
         totalCount={100}
-        setCurrentPage={()=>(console.log())}
+        setCurrentPage={() => console.log()}
         disableRowSelectionOnClick
       />
-      </Stack>
+    </Stack>
   );
 };
 

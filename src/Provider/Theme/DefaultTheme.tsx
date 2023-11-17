@@ -59,7 +59,7 @@ export const themeDefault = createTheme({
     },
     primary: {
       main: '#050D13',
-      light: '#242526'
+      light: '#242526',
     },
     secondary: {
       main: '#FF9900',
@@ -76,25 +76,25 @@ export const themeDefault = createTheme({
       },
     },
 
-    MuiSvgIcon:{
-      styleOverrides:{
-        root:{
-          fill:'white'
-        }
-      }
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          fill: 'white',
+        },
+      },
     },
 
-    MuiIconButton:{
-      styleOverrides:{
-        root:{
-          ":active":{
-            background: '#FF9900'
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          ':active': {
+            background: '#FF9900',
           },
-           ":hover":{
-            background: '#FF9900'
-          } 
-        }
-      }
+          ':hover': {
+            background: '#FF9900',
+          },
+        },
+      },
     },
 
     MuiTextField: {
@@ -103,8 +103,17 @@ export const themeDefault = createTheme({
           input: {
             color: '#FF9900',
           },
+          ".Mui-disabled": {
+            color: "#FF9900!important" ,
+            borderColor: '#FF9900!important',
+            "WebkitTextFillColor": '#FF9900!important'
+          },
+          ".Mui-disabled .MuiOutlinedInput-notchedOutline": {
+            borderColor: '#FF9900!important',
+          },
+
           '& .MuiInputBase-input-MuiOutlinedInput-input': {
-            background: 'red'
+            background: 'red',
           },
           '& label.Mui-focused': {
             color: '#FF9900',
@@ -146,21 +155,19 @@ export const themeDefault = createTheme({
 
     MuiCssBaseline: {
       styleOverrides: (themeParam) => ({
-
-   
         body: {
           background: `url(${background}) 100% 68%/cover no-repeat fixed, #050D13`,
           backgroundSize: 'contain',
         },
-        "#root": {
-          height: '100%'
+        '#root': {
+          height: '100%',
         },
-        "input::-webkit-inner-spin-button": {
-          "WebkitAppearance": "none",
-          "margin": 0,
+        'input::-webkit-inner-spin-button': {
+          WebkitAppearance: 'none',
+          margin: 0,
         },
-        "input[type=number]": {
-          "MozAppearance": "textfield",
+        'input[type=number]': {
+          MozAppearance: 'textfield',
         },
         a: {
           color: '#fff',
@@ -180,6 +187,5 @@ export const themeDefault = createTheme({
         },
       }),
     },
-    
   },
 });
