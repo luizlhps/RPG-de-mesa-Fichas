@@ -36,13 +36,16 @@ const ProfileCreate = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const classField = watch('Classes');
 
   //fetch data and update atributes
   const { attributes, classes, originAttributes, setAttributes } = useFetchNewSheet();
 
   //fetch Hp and Mp
-  useFetchHpMp({ attributes, classField, originAttributes, setValue, watch });
+  useFetchHpMp({ attributes, originAttributes, setValue, watch });
+
+  //false data for tables
+  const rows = falseData;
+
 
   const {
     handleContinueForm,
@@ -54,7 +57,6 @@ const ProfileCreate = () => {
     widthSlide,
   } = useSlider();
 
-  const rows = falseData;
 
   const onSubmit = (data: FieldValues) => {
     console.log(data);
@@ -62,7 +64,7 @@ const ProfileCreate = () => {
 
   return (
     <Box
-      mt={6}
+      minHeight={'100%'}
       bgcolor={theme.palette.background.paper}
       padding={small ? 2 : 6}
       display={'flex'}

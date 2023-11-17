@@ -10,7 +10,6 @@ const useFetchNewSheet = () => {
 
   const fetchNewSheet = () => {
     Api.get('/new').then((res) => {
-      console.log(JSON.parse(res.data.sheet));
       const arrayOfAttributes = res.data.attributes;
       const classesApi = res.data.classes;
 

@@ -5,14 +5,15 @@ import { Api } from '../services/axiosConfig';
 import { FieldValues, UseFormWatch } from 'react-hook-form';
 
 interface MyGenericInterface {
-    setValue: any
-    watch: UseFormWatch<FieldValues>
-    originAttributes: any
-    classField: any
-    attributes: any
-  }
+  setValue: any;
+  watch: UseFormWatch<FieldValues>;
+  originAttributes: any;
+  attributes: any;
+}
 
-const useFetchHpMp = ({ setValue, watch, originAttributes, classField, attributes }:MyGenericInterface) => {
+const useFetchHpMp = ({ setValue, watch, originAttributes, attributes }: MyGenericInterface) => {
+  const classField = watch('Classes');
+
   const fetchHpMP = (haveError: boolean, attributesField: ICharacterStats, level: number) => {
     if (!haveError && attributesField && classField) {
       Api.post('/new/hp-mp', {
@@ -33,7 +34,6 @@ const useFetchHpMp = ({ setValue, watch, originAttributes, classField, attribute
 
     fetchHpMP(haveError, attributesField, level);
   }, [attributes, classField]);
-
 };
 
 export default useFetchHpMp;
