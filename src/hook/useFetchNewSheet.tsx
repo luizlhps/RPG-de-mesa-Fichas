@@ -16,7 +16,7 @@ const useFetchNewSheet = () => {
       const attributesModify = arrayOfAttributes.map((item: number, index: number) => {
         return { id: index + 1, value: item, fieldCurrent: null };
       });
-
+      console.log(JSON.parse(res.data.sheet));
       //Atributtes
       setAttributes(attributesModify);
       setOriginAttributes(arrayOfAttributes);
@@ -34,7 +34,7 @@ const useFetchNewSheet = () => {
     attributes,
     originAttributes,
     classes,
-    setAttributes
+    setAttributes,
   };
 };
 

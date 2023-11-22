@@ -64,6 +64,7 @@ const ProfileCreate = () => {
 
   return (
     <Box
+      mt={2}
       minHeight={'100%'}
       bgcolor={theme.palette.background.paper}
       padding={small ? 2 : 6}
