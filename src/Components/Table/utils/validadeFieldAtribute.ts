@@ -9,7 +9,7 @@ const validadeFieldAttritube = (attributesField: ICharacterStats, originAttribut
 
     arrayOfValuesAttributes.forEach((element) => {
       //adds a numeric element if it is zero
-      if (element == 0) {
+      if (element === 0) {
         amountOf0.push(element);
       }
 

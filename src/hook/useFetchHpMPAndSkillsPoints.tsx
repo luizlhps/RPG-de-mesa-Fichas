@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ICharacterStats } from '../Components/StatsLayout/AtributteField/types/OptionAttribute';
 import validadeFieldAttritube from '../Components/Table/utils/validadeFieldAtribute';
 import { Api } from '../services/axiosConfig';
@@ -11,11 +11,14 @@ interface MyGenericInterface {
   attributes: any;
 }
 
-const useFetchHpMp = ({ setValue, watch, originAttributes, attributes }: MyGenericInterface) => {
+const useFetchHpMPAndSkillsPoints = ({ setValue, watch, originAttributes, attributes }: MyGenericInterface) => {
+  const [remainingOfSkilsPoints, setRemainingOfSkilsPoints] = useState<number | undefined>(0);
+  const [skillsPoints, setSkillsPoints] = useState();
   const classField = watch('Classes');
 
-  const fetchHpMP = (haveError: boolean, attributesField: ICharacterStats, level: number) => {
+  const fetchHpMPAndSkillsPoints = (haveError: boolean, attributesField: ICharacterStats, level: number) => {
     if (!haveError && attributesField && classField) {
+      //hp and mp
       Api.post('/new/hp-mp', {
         class: classField,
         level: level,
@@ -23,6 +26,14 @@ const useFetchHpMp = ({ setValue, watch, originAttributes, attributes }: MyGener
       }).then((res) => {
         setValue('HP', res.data.HP);
         setValue('MP', res.data.MP);
+      });
+
+      //skills points
+      Api.post('/new/skill-points', {
+        level: level,
+        attributes: attributesField,
+      }).then((res) => {
+        setSkillsPoints(res.data.skill_points);
       });
     }
   };
@@ -32,8 +43,14 @@ const useFetchHpMp = ({ setValue, watch, originAttributes, attributes }: MyGener
     const haveError = validadeFieldAttritube(attributesField, originAttributes);
     const level = 1;
 
-    fetchHpMP(haveError, attributesField, level);
+    fetchHpMPAndSkillsPoints(haveError, attributesField, level);
   }, [attributes, classField]);
+
+  return {
+    skillsPoints,
+    setRemainingOfSkilsPoints,
+    remainingOfSkilsPoints,
+  };
 };
 
-export default useFetchHpMp;
+export default useFetchHpMPAndSkillsPoints;

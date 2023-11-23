@@ -15,7 +15,7 @@ import { AbilityTable } from '../Components/Table/Layouts/AbilityTable';
 
 //hooks
 import useSlider from '../hook/useSlider';
-import useFetchHpMp from '../hook/useFetchHpMp';
+import useFetchHpMPAndSkillsPoints from '../hook/useFetchHpMPAndSkillsPoints';
 import useFetchNewSheet from '../hook/useFetchNewSheet';
 
 //utils
@@ -41,7 +41,12 @@ const ProfileCreate = () => {
   const { attributes, classes, originAttributes, setAttributes, sheet } = useFetchNewSheet();
 
   //fetch Hp and Mp
-  useFetchHpMp({ attributes, originAttributes, setValue, watch });
+  const { skillsPoints, remainingOfSkilsPoints, setRemainingOfSkilsPoints } = useFetchHpMPAndSkillsPoints({
+    attributes,
+    originAttributes,
+    setValue,
+    watch,
+  });
 
   //false data for tables
   const rows = falseData;
@@ -81,6 +86,7 @@ const ProfileCreate = () => {
 
       <Stack flexDirection={breakHD ? 'column' : 'row'} gap={3} rowGap={8}>
         <StatsLayout
+          remainingOfSkilsPoints={remainingOfSkilsPoints}
           setAttributes={setAttributes}
           attributes={attributes}
           breakHD={breakHD}
@@ -105,7 +111,17 @@ const ProfileCreate = () => {
                 {slideIndex === 0 && (
                   <>
                     <Stack flexDirection={breakIn860 ? 'column' : 'row'} gap={3} rowGap={2}>
-                        <Box flex={1.4}>{sheet && <SkillsTable rows={sheet.skills} />}</Box> 
+                      <Box flex={1.4}>
+                        {sheet && (
+                          <SkillsTable
+                            setRemainingOfSkilsPoints={setRemainingOfSkilsPoints}
+                            watch={watch}
+                            setValue={setValue}
+                            quantityMax={skillsPoints}
+                            rows={sheet.skills}
+                          />
+                        )}
+                      </Box>
                       <Stack rowGap={2} flex={2}>
                         <AbilityTable rows={rows} />
                         <AttacksTable rows={rows} />

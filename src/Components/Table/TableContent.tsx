@@ -4,7 +4,7 @@ type RowType<T extends string | number | symbol> = {
   [key in T]: string | number; // Adjust the type of the values as needed
 };
 
-export const TableContent =  <T extends string | number | symbol>({
+export const TableContent = <T extends string | number | symbol>({
   rows,
   rowsName,
   key,
@@ -12,6 +12,7 @@ export const TableContent =  <T extends string | number | symbol>({
   field,
   rowCondition,
   rowFieldCondition,
+  hiddenIconRowCondition,
   fn,
   withoutBox,
 }: {
@@ -21,8 +22,9 @@ export const TableContent =  <T extends string | number | symbol>({
   rowsName: keyof RowType<T>;
   secondField?: keyof RowType<T>;
   withoutBox?: boolean;
-  rowCondition: string | number
-  rowFieldCondition: keyof RowType<T>
+  rowCondition: string | number;
+  hiddenIconRowCondition: boolean
+  rowFieldCondition: keyof RowType<T>;
   fn: (selected: any) => void;
 }) => {
   const theme = useTheme();
@@ -45,7 +47,7 @@ export const TableContent =  <T extends string | number | symbol>({
               </TableCell>
               <TableCell align='right' padding='none'>
                 <Stack flexDirection={'row'} gap={2} justifyContent={'flex-end'} marginRight={2}>
-                  {row[rowFieldCondition] !== rowCondition && (
+                  {(row[rowFieldCondition] !== rowCondition && hiddenIconRowCondition) && (
                     <IconButton
                       sx={{
                         width: 30,
@@ -57,7 +59,7 @@ export const TableContent =  <T extends string | number | symbol>({
                       +
                     </IconButton>
                   )}
-                  {row[rowFieldCondition] === rowCondition && (
+                  {row[rowFieldCondition] === rowCondition  && (
                     <IconButton
                       sx={{
                         width: 30,

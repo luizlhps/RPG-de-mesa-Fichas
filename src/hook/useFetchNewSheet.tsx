@@ -33,8 +33,6 @@ const useFetchNewSheet = () => {
     });
   };
 
-  console.log(sheet);
-
   useEffect(() => {
     fetchNewSheet();
   }, []);

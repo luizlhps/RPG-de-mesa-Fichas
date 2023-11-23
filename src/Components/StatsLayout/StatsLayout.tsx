@@ -15,6 +15,7 @@ interface IProps {
   control: Control<FieldValues, any>;
   attributes: OptionAttribute[] | undefined;
   setAttributes: React.Dispatch<React.SetStateAction<OptionAttribute[] | undefined>>;
+  remainingOfSkilsPoints: number | undefined;
   classes: IClasses[] | undefined;
 }
 
@@ -25,6 +26,7 @@ export const StatsLayout = ({
   errors,
   control,
   attributes,
+  remainingOfSkilsPoints,
   setAttributes,
   classes,
 }: IProps) => {
@@ -236,7 +238,7 @@ export const StatsLayout = ({
                 render={({ field }) => (
                   <>
                     <TextField
-                     disabled
+                      disabled
                       type='number'
                       size='small'
                       value={field.value}
@@ -268,9 +270,16 @@ export const StatsLayout = ({
                 )}
               />
               <Stack>
-                <Typography fontSize={14}> Level: 2</Typography>
-                <Typography fontSize={14}> Atributos Disponiveis: 2</Typography>
-                <Typography fontSize={14}> Pericias Disponiveis: 2</Typography>
+                <Typography fontSize={14}> Level: 1</Typography>
+
+                <Stack flexDirection={'row'} gap={0.5}>
+                  <Typography fontSize={14}> Pericias Disponiveis:</Typography>
+                  {remainingOfSkilsPoints && (
+                    <Typography fontSize={14} color={remainingOfSkilsPoints < 0 ? 'error' : theme.palette.text.primary}>
+                      {remainingOfSkilsPoints ?? 0}
+                    </Typography>
+                  )}
+                </Stack>
               </Stack>
             </Stack>
           </Stack>
