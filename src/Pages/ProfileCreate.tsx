@@ -38,14 +38,13 @@ const ProfileCreate = () => {
   } = useForm();
 
   //fetch data and update atributes
-  const { attributes, classes, originAttributes, setAttributes } = useFetchNewSheet();
+  const { attributes, classes, originAttributes, setAttributes, sheet } = useFetchNewSheet();
 
   //fetch Hp and Mp
   useFetchHpMp({ attributes, originAttributes, setValue, watch });
 
   //false data for tables
   const rows = falseData;
-
 
   const {
     handleContinueForm,
@@ -56,7 +55,6 @@ const ProfileCreate = () => {
     slideIndex,
     widthSlide,
   } = useSlider();
-
 
   const onSubmit = (data: FieldValues) => {
     console.log(data);
@@ -107,9 +105,7 @@ const ProfileCreate = () => {
                 {slideIndex === 0 && (
                   <>
                     <Stack flexDirection={breakIn860 ? 'column' : 'row'} gap={3} rowGap={2}>
-                      <Box flex={1.4}>
-                        <SkillsTable />
-                      </Box>
+                        <Box flex={1.4}>{sheet && <SkillsTable rows={sheet.skills} />}</Box> 
                       <Stack rowGap={2} flex={2}>
                         <AbilityTable rows={rows} />
                         <AttacksTable rows={rows} />
