@@ -1,43 +1,39 @@
-import {
-  useTheme
-} from '@mui/material';
+import { useTheme } from '@mui/material';
 import { TableComponent } from '..';
+import { Skill } from '../../../services/types';
+import { useState } from 'react';
 
-export const SkillsTable = () => {
-  const theme = useTheme();
+interface IProps {
+  rows: Skill[];
+}
 
-  function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
-    return { name, calories, fat, carbs, protein };
-  }
+export const SkillsTable = ({ rows }: IProps) => {
+  const [rowsSkill, setRowsSkill] = useState(rows);
 
-  const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-  ];
+  const handleTrainedSkill = (item: any) => {
+    console.log(item);
+
+    const changeValue = rowsSkill.map((row) => {
+      if (row.name === item.name && row.trained === 0) return { ...row, trained: 1 };
+      if (row.name === item.name && row.trained === 1) return { ...row, trained: 0 };
+      return row;
+    });
+
+    setRowsSkill(changeValue);
+  };
 
   return (
     <>
       <TableComponent.Root>
         <TableComponent.Header field='PERICIAS' secondField='NIVEIS' />
         <TableComponent.Content
-        fn={(fn)=>console.log(fn)}
+          rowCondition={1}
+          rowFieldCondition='trained'
+          fn={handleTrainedSkill}
           rowsName='name'
-          field='calories'
-          secondField='calories'
-          rows={rows}
+          field='trained'
+          secondField='value'
+          rows={rowsSkill}
         ></TableComponent.Content>
         <TableComponent.Footer />
       </TableComponent.Root>
