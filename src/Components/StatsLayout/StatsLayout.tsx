@@ -6,6 +6,8 @@ import { AtributteFieldCreate } from './AtributteField';
 import { OptionAttribute } from './AtributteField/types/OptionAttribute';
 import { ComboBox } from '../ComboBox';
 import { IClasses } from '../../services/types';
+import { BasicModal } from '../Modal';
+import { HistoryForm } from '../HistoryForm';
 
 interface IProps {
   breakHD: boolean;
@@ -89,14 +91,10 @@ export const StatsLayout = ({
           type='number'
         />
       </Stack>
+
       <Stack mt={6} direction='row' gap={2}>
-        <Button
-          fullWidth
-          variant='contained'
-          sx={{ color: theme.palette.background.default, flex: 1, fontWeight: 600, height: 45 }}
-        >
-          historia
-        </Button>
+        <HistoryForm />
+
         <Button
           fullWidth
           variant='contained'

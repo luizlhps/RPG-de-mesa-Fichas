@@ -103,12 +103,12 @@ export const themeDefault = createTheme({
           input: {
             color: '#FF9900',
           },
-          ".Mui-disabled": {
-            color: "#FF9900!important" ,
+          '.Mui-disabled': {
+            color: '#FF9900!important',
             borderColor: '#FF9900!important',
-            "WebkitTextFillColor": '#FF9900!important'
+            WebkitTextFillColor: '#FF9900!important',
           },
-          ".Mui-disabled .MuiOutlinedInput-notchedOutline": {
+          '.Mui-disabled .MuiOutlinedInput-notchedOutline': {
             borderColor: '#FF9900!important',
           },
 
@@ -154,7 +154,24 @@ export const themeDefault = createTheme({
     },
 
     MuiCssBaseline: {
-      styleOverrides: (themeParam) => ({
+      styleOverrides: (theme) => ({
+        ///
+
+        '::-webkit-scrollbar-track': {
+          background: '#424242;  ',
+        },
+
+        '::-webkit-scrollbar': {
+          width: '10px;',
+          height: '10px;',
+        },
+        '::-webkit-scrollbar-thumb:hover': {
+          background: '#555; ',
+        },
+        ' ::-webkit-scrollbar-thumb': {
+          background: '#585858; ',
+        },
+
         body: {
           background: `url(${background}) 100% 68%/cover no-repeat fixed, #050D13`,
           backgroundSize: 'contain',
