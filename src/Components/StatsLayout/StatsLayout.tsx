@@ -10,7 +10,6 @@ import { BasicModal } from '../Modal';
 import { HistoryForm } from '../HistoryForm';
 
 interface IProps {
-  breakHD: boolean;
   breakIn700: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors<FieldValues>;
@@ -22,7 +21,6 @@ interface IProps {
 }
 
 export const StatsLayout = ({
-  breakHD,
   breakIn700,
   register,
   errors,
@@ -54,7 +52,7 @@ export const StatsLayout = ({
 
   return (
     <Box flex={1}>
-      <Stack flexDirection={breakHD ? 'column' : 'row'} direction='row' gap={2} rowGap={2}>
+      <Stack flexDirection={breakIn700 ? 'column' : 'row'} direction='row' gap={2} rowGap={2}>
         <TextField
           {...register('Name', { required: true })}
           autoComplete='off'
@@ -70,7 +68,7 @@ export const StatsLayout = ({
           type='number'
         />
       </Stack>
-      <Stack flexDirection={breakHD ? 'column' : 'row'} mt={2} direction='row' gap={2} rowGap={2}>
+      <Stack flexDirection={breakIn700 ? 'column' : 'row'} mt={2} direction='row' gap={2} rowGap={2}>
         <ComboBox
           label='Classe'
           control={control}

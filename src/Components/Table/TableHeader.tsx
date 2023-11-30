@@ -4,9 +4,10 @@ import React from 'react';
 interface IProps {
   field: string;
   secondField?: string;
+  customSecondField?: React.ReactNode 
 }
 
-export const TableHeader = ({ field, secondField }: IProps) => {
+export const TableHeader = ({ field, secondField, customSecondField }: IProps) => {
   const theme = useTheme();
   return (
     <TableContainer
@@ -29,6 +30,16 @@ export const TableHeader = ({ field, secondField }: IProps) => {
                 </Typography>
               </TableCell>
             )}
+
+            {
+              customSecondField && (
+                <TableCell align='right'>
+                <Typography fontWeight={500} fontSize={14} sx={{ color: theme.palette.background.default }}>
+                  {customSecondField}
+                </Typography>
+              </TableCell>
+              )
+            }
           </TableRow>
         </TableHead>
       </Table>

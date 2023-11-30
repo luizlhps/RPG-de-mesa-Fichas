@@ -20,6 +20,7 @@ import useFetchNewSheet from '../hook/useFetchNewSheet';
 
 //utils
 import falseData from '../utils/createFalseData';
+import { InventoryTable } from '../Components/Table/Layouts/InventoryTable';
 
 const ProfileCreate = () => {
   const theme = useTheme();
@@ -65,6 +66,8 @@ const ProfileCreate = () => {
     console.log(data);
   };
 
+
+
   return (
     <Box
       mt={2}
@@ -89,7 +92,6 @@ const ProfileCreate = () => {
           remainingOfSkilsPoints={remainingOfSkilsPoints}
           setAttributes={setAttributes}
           attributes={attributes}
-          breakHD={breakHD}
           breakIn700={breakIn700}
           errors={errors}
           control={control}
@@ -132,7 +134,7 @@ const ProfileCreate = () => {
               </Slide>
               <Slide minWidth={widthSlide}>
                 <Stack flexDirection={breakIn860 ? 'column' : 'row'} gap={3} rowGap={2}>
-                  <AttacksTable rows={rows} />
+                  <InventoryTable rows={rows} />
                 </Stack>
               </Slide>
             </Slider>
@@ -148,10 +150,13 @@ const ProfileCreate = () => {
                 onClick={() => {
                   handlePreviousForm();
                   setTimeout(() => {
-                    window.scrollTo(0, document.body.scrollHeight);
-                  }, 10);
+                    window.scrollTo({
+                      top: 1200,
+                       behavior: 'smooth',
+                     });
+                  }, 200);
                 }}
-                sx={{ cursor: 'pointer', ':hover': { fill: theme.palette.secondary.main } }}
+                sx={{ cursor: 'pointer', /* ':hover': { fill: theme.palette.secondary.main } */ }}
               />
               <Button
                 variant='contained'
@@ -178,7 +183,7 @@ const ProfileCreate = () => {
                   handleContinueForm();
                   setTimeout(() => {
                     window.scrollTo(0, document.body.scrollHeight);
-                  }, 10);
+                  }, 7);
                 }}
                 sx={{ cursor: 'pointer', ':hover': { fill: theme.palette.secondary.main } }}
               />

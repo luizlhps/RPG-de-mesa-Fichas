@@ -43,11 +43,8 @@ export const HistoryForm = () => {
           borderTop={1}
           borderColor={theme.palette.grey[800]}
         >
-          <Button size='small' sx={{ height: 40, fontSize: 14 }} variant='contained'>
+          <Button onClick={handleClose} size='small' sx={{ height: 40, width:150, fontSize: 14 }} variant='contained'>
             Sair
-          </Button>
-          <Button size='small' sx={{ height: 40, fontSize: 14 }} variant='contained'>
-            Salvar historia
           </Button>
         </Stack>
       </BasicModal>
