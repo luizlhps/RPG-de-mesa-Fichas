@@ -22,6 +22,7 @@ export const BasicModal = ({ open, handleClose, children, maxWidth }: IProps) =>
     maxWidth: maxWidth ?? 400,
     width: `90%`,
     bgcolor: 'background.paper',
+    borderRadius: '5px'
   };
 
   return (

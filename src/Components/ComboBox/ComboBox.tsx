@@ -3,7 +3,7 @@ import React from 'react';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 
 interface IProps {
-  style: any;
+  style?: any;
   control: Control<FieldValues, any>;
   nameField: string;
   defaultValue?: any;

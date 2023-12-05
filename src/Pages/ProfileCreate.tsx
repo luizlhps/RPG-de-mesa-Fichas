@@ -134,7 +134,7 @@ const ProfileCreate = () => {
               </Slide>
               <Slide minWidth={widthSlide}>
                 <Stack flexDirection={breakIn860 ? 'column' : 'row'} gap={3} rowGap={2}>
-                  <InventoryTable rows={rows} />
+                  <InventoryTable rows={rows} control={control} />
                 </Stack>
               </Slide>
             </Slider>
